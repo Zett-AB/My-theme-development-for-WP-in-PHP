@@ -2,7 +2,7 @@
             get_header();
         ?>
 
-        <div class="mainslider glide">
+        <div class="mainslider glide"><!--Блок слайдера-->
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
 
@@ -10,8 +10,8 @@
                 <?php
                     // параметры по умолчанию. Код скачан с wp-kama.ru 
                     $posts = get_posts( array(
-                        'numberposts' => -1,//количество постов, которые надо выводить на странице
-                        'category_name'    => "slider", //Здесь правим в  category_name, так как выводим посты определенной категории
+                        'numberposts' => -1,//количество постов, которые надо выводить на странице, ы данном случаи указываем, что все
+                        'category_name'    => "slider", //Здесь правим в  category_name, так как выводим посты определенной категории согласно рубрике
                         'orderby'     => 'date', //сотритурем посты по дате
                         'order'       => 'ASC', //выводим посты в обратном порядке
                         'post_type'   => 'post',
@@ -22,24 +22,24 @@
                         setup_postdata( $post ); //прерываем тут код PHP чтобы вставить для выполнения смешанный код HTML и PHP
                         ?>
                         <!-- // формат вывода the_title() ... -->
-                            <li style="background-image: url('<?php the_field('slider_img');?>)" class="glide__slide">
+                            <li style="background-image: url('<?php the_field('slider_img');?>)" class="glide__slide"><!--Тут указали где нужно брать картинки для слайера -->
                             <div class="container">
                                 <div class="row">
                                     <div class="col-lg-7 offset-1">
                                     <!-- Пишем код для изменения цвета заголовка h2 -->    
                                     <h2 
                                       style="<?php $field = get_field("slider_color");
-                                            if ($field == 'white') {
+                                            if ($field == 'white') {  //тут пишем код по смене цвета заголовка на слайдере в простом условии ЕСЛИ
                                                 ?>   
                                                 color:#ffffff  
                                                 <?php
                                             }
 
                                       ?>" 
-                                        class="slider__title"><?php the_title(); ?></h2>
+                                        class="slider__title"><?php the_title(); ?></h2> <!--тут указываем, где брать заголовок для слайдера -->
                                         <?php 
                                             $field = get_field('slider_btn');
-                                                if ($field == 'on'){
+                                                if ($field == 'on'){ //Здесь условия когда появляется кнопка на слайдере и что в этом случаи появляется окно для указанния ссылки для кнопки
                                                 ?>
                                                     <a href="<?php the_field('slider_link'); ?>" class="button">Узнать больше</a>
                                                 <?php                                                    
@@ -48,7 +48,7 @@
                                         
                                     </div>
                                 </div>
-                                <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
+                                <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><!--Это код кнопок переключения слайдов -->
                                     <svg width="15" height="25" viewBox="0 0 15 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M0.982942 13.3923L12.2253 24.631C12.7186 25.123 13.5179 25.123 14.0124 24.631C14.5057 24.1389 14.5057 23.3397 14.0124 22.8476L3.66178 12.5007L14.0112 2.15378C14.5045 1.66172 14.5045 0.862477 14.0112 0.369169C13.5179 -0.122894 12.7174 -0.122894 12.2241 0.369169L0.981696 11.6077C0.495966 12.0947 0.495966 12.9065 0.982942 13.3923Z" fill="white"/>
                                     </svg>
