@@ -77,7 +77,7 @@
                     <div class="col-md-10 offset-md-1 col-lg-5 offset-lg-1">
                         <div class="about__img">
                             <img src="<?php the_field('about_img'); ?>" alt="про компанию">
-                            <!-- Поскольку уже созджали соответ-ие поля в плагине AFC здесь тоже прописываем код PHP для WP -->
+                            <!-- Поскольку уже создали соответ-ие поля в плагине AFC здесь тоже прописываем код PHP для WP -->
                             
                         </div>
                     </div>
@@ -280,7 +280,8 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div id="map" class="contacts__map">
+                        <div  class="contacts__map">
+                            <?php echo do_shortcode('[yamap center="55.7373,37.5049" height="100%" controls="" zoom="12" type="yandex#map"][yaplacemark  name="1" coord="55.7373,37.5049" icon="islands#dotIcon" color="#1e98ff"][/yamap]'); ?>
                         </div>
                     </div>
                 </div>
@@ -398,7 +399,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="title contacts__minititle">Оставьте ваш отзыв</div>
-                        <form action="#" class="contacts__feed">
+                        <!-- <form action="#" class="contacts__feed">
                             <label for="feedname">
                                 Ваше имя <span>*</span>
                             </label>
@@ -478,7 +479,14 @@
                                 </style>
                             </svg>
 
-                        </form>
+                        </form> -->
+                        <!-- Здесь меняем код следующим образом -делаем обертку для контейнера, т.е. дива(меняем тег form на div) а далее пишем код PHP для нашего шорткода из плагина ContackForm7  -->
+                        <div class="contacts__feed">
+                            <?php echo do_shortcode('[contact-form-7 id="176" title="Форма отзыва"]'); ?>
+
+                        </div>
+
+
                     </div>
                 </div>
                 <div class="row mt70">
@@ -487,32 +495,44 @@
                         <div class="feedslider glide">
                             <div class="glide__track" data-glide-el="track">
                                 <ul class="glide__slides">
+
+                                 <!-- Здесь пишем код для слайдера с ссылками на статьи в записках. Код будет смешанным в PHP будет вставлятся HTML -->
+                                    <?php
+                                        // параметры по умолчанию. Код скачан с wp-kama.ru 
+                                        $posts = get_posts( array(
+                                            'numberposts' => -1,//количество постов, которые надо выводить на странице, ы данном случаи указываем, что все
+                                            'category_name'    => "reviews", //Здесь правим в  category_name, так как выводим посты определенной категории согласно рубрике
+                                            'orderby'     => 'date', //сотритурем посты по датеgit 
+                                            'order'       => 'ASC', //выводим посты в обратном порядке
+                                            'post_type'   => 'post',
+                                            'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+                                        ) );
+
+                                        foreach( $posts as $post ){
+                                            setup_postdata( $post ); //прерываем тут код PHP чтобы вставить для выполнения смешанный код HTML и PHP
+                                            ?>
+                                            <!-- // формат вывода the_title() ... -->
+
                                     <li class="glide__slide">
                                         <div class="feedslider__title">
-                                            Иванов Игорь
+                                            <?php the_title(); ?>
+                                            <!-- Иванов Игорь -->
                                         </div>
                                         <div class="feedslider__text">
-                                            Спасибо огромное за вежливость и терпение. Обратился к вам только с идеей для подарка, а вы развили её до полноценного проекта! Так что мой сын теперь круглые сутки играет с железной дорогой, построенной по его планам)
+                                            <!-- Спасибо огромное за вежливость и терпение. Обратился к вам только с идеей для подарка, а вы развили её до полноценного проекта! Так что мой сын теперь круглые сутки играет с железной дорогой, построенной по его планам)
                                             <br><br>
-                                            Отдельное спасибо менеджеру Маргарите за терпение и стойкость!
+                                            Отдельное спасибо менеджеру Маргарите за терпение и стойкость! -->
+                                            <?php the_field('textaera_rev'); ?>
                                         </div>
                                     </li>
-                                    <li class="glide__slide">
-                                        <div class="feedslider__title">
-                                            Черкессов Алексей Дмитриевич
-                                        </div>
-                                        <div class="feedslider__text">
-                                            Заказывал у ребят целую партию игрушек для детского сада. Новый год прошел на ура! Теперь все детишки счастливы и не расстаются со своими подарками, а самые хитрые спрашивают когда следующие праздники)
-                                        </div>
-                                    </li>
-                                    <li class="glide__slide">
-                                        <div class="feedslider__title">
-                                            Анна Сергеевна
-                                        </div>
-                                        <div class="feedslider__text">
-                                            Решила к дню рождения своей малышки заказать подарки здесь. И ни сколько не жалею! Мишка именно такой, как я хотела, прямо как у меня в детстве: мягкий, приятный на ощупь и оочень милый. Сразу видно, что ручная работа.
-                                        </div>
-                                    </li>
+                                   
+                                    <?php //возобновляем прерванный выше код PHP 
+                                        }
+
+                                        wp_reset_postdata(); // сброс
+                                    
+                                    ?>
+                                    
                                 </ul>
                             </div>
 
