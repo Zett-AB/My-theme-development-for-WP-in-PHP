@@ -39,7 +39,7 @@ Template Name:   Игрушки
                                         <!-- Классика. Должен быть у каждого ребенка!                             -->
                                         <?php the_field('toys_descr'); ?>
                                     </div>
-                                    <div class="minibutton toys__trigger">Подробнее</div>
+                                    <a href="<?php echo get_permalink(); ?>" class="minibutton toys__trigger">Подробнее</a>
                                 </div>
                             </div>
                           
@@ -84,7 +84,7 @@ Template Name:   Игрушки
                                         <!-- Кто в детстве не хотел научиться летать? А змей поможет поймать ветер и унести все заботы далеко-далеко...     -->
                                         <?php the_field('toys_descr'); ?>
                                     </div>
-                                    <div class="minibutton toys__trigger">Подробнее</div>
+                                    <a href="<?php echo get_permalink(); ?>" class="minibutton toys__trigger">Подробнее</a>
                                 </div>
                             </div>
 
