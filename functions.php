@@ -20,10 +20,12 @@
                 if($item->current){
                     $atts['class'] .= ' header__nav-item-active';
                 }
-                // print_r($item);
-                if($item->ID === 197 && (in_category( 'soft_toys' ) || in_category('edu_toys'))){
+                // выше условие для меню, чтобы оно встало согласно нашей верстке и при активации подсвечивалось
+                // print_r($item); //для определния необходимого нам ID пишем эту строку кода, сохраняем, далее заходим на страницу в постом и обновляем её, далее ctrl+f набирем [ID] и ищем нужный нам   
+                if($item->ID === 196 && (in_category( 'soft_toys' ) || in_category('edu_toys'))){
                     $atts['class'] .= ' header__nav-item-active';
                 };
+                // выше - это условие для подсветки меню, когда заходим на страницу с постом
             };
             return $atts;
         }
